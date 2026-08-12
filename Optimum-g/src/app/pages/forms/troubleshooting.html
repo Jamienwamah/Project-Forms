@@ -1,0 +1,302 @@
+<div class="container">
+  <h2>DEVICE TROUBLESHOOTING FORM</h2>
+  <p><strong>Date:</strong> {{ currentDate | date:'yyyy-MM-dd' }}</p>
+
+  <div class="purpose-box">
+    <h3>PURPOSE</h3>
+    <p>
+      This Device Troubleshooting Consent Form serves as an agreement between Optimum Global Capital Management Limited
+      and the undersigned employee regarding the diagnosis, troubleshooting, repair, or maintenance of a company-issued device.
+      By signing this form, the employee authorizes the IT Department to inspect, troubleshoot, and perform necessary corrective
+      actions to restore the device to proper working conditions while complying with company IT policies and security procedures.
+    </p>
+  </div>
+
+  <form [formGroup]="troubleshootingForm" (ngSubmit)="onSubmit()" novalidate>
+
+    <!-- EMPLOYEE INFORMATION -->
+    <fieldset formGroupName="employee">
+      <legend>EMPLOYEE INFORMATION</legend>
+
+      <div class="form-group">
+        <label for="empName">Name *</label>
+        <input type="text" id="empName" formControlName="name" />
+        <span class="error" *ngIf="isFieldInvalid('employee', 'name')">Name is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="department">Department *</label>
+        <input type="text" id="department" formControlName="department" />
+        <span class="error" *ngIf="isFieldInvalid('employee', 'department')">Department is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="jobTitle">Job Title *</label>
+        <input type="text" id="jobTitle" formControlName="jobTitle" />
+        <span class="error" *ngIf="isFieldInvalid('employee', 'jobTitle')">Job Title is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="employeeId">Employee ID *</label>
+        <input type="text" id="employeeId" formControlName="employeeId" />
+        <span class="error" *ngIf="isFieldInvalid('employee', 'employeeId')">Employee ID is required.</span>
+      </div>
+    </fieldset>
+
+    <!-- DEVICE INFORMATION -->
+    <fieldset formGroupName="device">
+      <legend>DEVICE INFORMATION</legend>
+
+      <div class="form-group">
+        <label for="assetTag">Asset Tag (if applicable)</label>
+        <input type="text" id="assetTag" formControlName="assetTag" />
+      </div>
+
+      <div class="form-group">
+        <label for="deviceType">Device Type *</label>
+        <select id="deviceType" formControlName="deviceType">
+          <option value="">-- Select Device Type --</option>
+          <option value="Laptop">Laptop</option>
+          <option value="Desktop">Desktop</option>
+          <option value="Phone">Phone</option>
+          <option value="Tablet">Tablet</option>
+        </select>
+        <span class="error" *ngIf="isFieldInvalid('device', 'deviceType')">Device Type is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="brandModel">Brand/Model *</label>
+        <input type="text" id="brandModel" formControlName="brandModel" />
+        <span class="error" *ngIf="isFieldInvalid('device', 'brandModel')">Brand/Model is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="serialNumber">Serial Number *</label>
+        <input type="text" id="serialNumber" formControlName="serialNumber" />
+        <span class="error" *ngIf="isFieldInvalid('device', 'serialNumber')">Serial Number is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="operatingSystem">Operating System *</label>
+        <input type="text" id="operatingSystem" formControlName="operatingSystem" />
+        <span class="error" *ngIf="isFieldInvalid('device', 'operatingSystem')">Operating System is required.</span>
+      </div>
+    </fieldset>
+
+    <!-- ISSUE DETAILS -->
+    <fieldset formGroupName="issue">
+      <legend>ISSUE DETAILS</legend>
+
+      <div class="form-group">
+        <label for="dateReported">Date Issue Was Reported *</label>
+        <input type="date" id="dateReported" formControlName="dateReported" />
+        <span class="error" *ngIf="isFieldInvalid('issue', 'dateReported')">Report date is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="reportedBy">Reported By *</label>
+        <input type="text" id="reportedBy" formControlName="reportedBy" />
+        <span class="error" *ngIf="isFieldInvalid('issue', 'reportedBy')">Reported by is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="problemDescription">Description of the Problem *</label>
+        <textarea id="problemDescription" formControlName="description" rows="4"></textarea>
+        <span class="error" *ngIf="isFieldInvalid('issue', 'description')">Description is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="issueStartDate">When Did the Issue Start? *</label>
+        <input type="text" id="issueStartDate" formControlName="startDate" />
+        <span class="error" *ngIf="isFieldInvalid('issue', 'startDate')">Start date details required.</span>
+      </div>
+
+      <div class="form-group">
+        <label>Has Any Troubleshooting Already Been Attempted?</label>
+        <label class="inline"><input type="radio" [value]="true" formControlName="troubleshootingAttempted" /> Yes</label>
+        <label class="inline"><input type="radio" [value]="false" formControlName="troubleshootingAttempted" /> No</label>
+      </div>
+
+      <div class="form-group" *ngIf="troubleshootingForm.get('issue.troubleshootingAttempted')?.value">
+        <label for="attemptedDetails">If Yes, please provide details:</label>
+        <textarea id="attemptedDetails" formControlName="attemptedDetails" rows="3"></textarea>
+      </div>
+    </fieldset>
+
+    <!-- EMPLOYEE CONSENT & TERMS -->
+    <fieldset>
+      <legend>EMPLOYEE CONSENT &amp; TERMS AND CONDITIONS</legend>
+
+      <p>I hereby authorize the IT Department of Optimum Global Financial Services Limited to perform the necessary troubleshooting, diagnostics, maintenance, and repair activities on the above-mentioned company-issued device.</p>
+
+      <p>I understand that the troubleshooting process may include:</p>
+      <ul class="terms-list">
+        <li>Hardware diagnostics and testing</li>
+        <li>Software troubleshooting and repair</li>
+        <li>Operating system updates or reinstallation</li>
+        <li>Driver installation or updates</li>
+        <li>Malware or virus scanning and removal</li>
+        <li>Configuration changes</li>
+        <li>Password resets (where applicable)</li>
+        <li>Temporary removal and reinstallation of business applications</li>
+        <li>Replacement of faulty hardware components (where approved)</li>
+      </ul>
+
+      <p>I acknowledge that although the IT Department will make every reasonable effort to preserve existing data, there may be situations where data loss is unavoidable during troubleshooting or repair.</p>
+
+      <h4>TERMS AND CONDITIONS</h4>
+      <ol class="terms-list">
+        <li><strong>Authorization:</strong> I authorize the IT Department to access and troubleshoot my assigned company device for the purpose of diagnosing and resolving reported issues.</li>
+        <li><strong>Data Backup:</strong> Where possible, I understand that IT will attempt to back up important business data before carrying out major repairs. However, I acknowledge that data recovery cannot always be guaranteed.</li>
+        <li><strong>Software Installation:</strong> I authorize IT to install, update, remove, or reconfigure software required to restore the device to normal operation.</li>
+        <li><strong>Hardware Repair:</strong> Where necessary and approved, defective hardware components may be repaired or replaced.</li>
+        <li><strong>Security Compliance:</strong> IT may review system configurations, installed applications, and security settings to ensure compliance with company policies.</li>
+        <li><strong>Temporary Device Retention:</strong> I understand that the device may need to remain with the IT Department for the duration of troubleshooting and repair.</li>
+        <li><strong>Confidentiality:</strong> The IT Department will maintain the confidentiality of business information accessed during troubleshooting and will only access files where necessary to resolve the reported issue.</li>
+        <li><strong>Reporting Additional Issues:</strong> If unrelated hardware or software faults are discovered during diagnosis, the IT Department may perform additional corrective actions or seek further approval where required.</li>
+      </ol>
+    </fieldset>
+
+    <!-- ACKNOWLEDGMENT -->
+    <fieldset formGroupName="consent">
+      <legend>ACKNOWLEDGMENT</legend>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" formControlName="agreed" />
+          I confirm that I have reported the issue described, authorize the IT Department to troubleshoot and repair my device, understand the process and potential data loss risks, and agree to the terms outlined above. *
+        </label>
+        <span class="error" *ngIf="isFieldInvalid('consent', 'agreed')">Acknowledgment is required.</span>
+      </div>
+    </fieldset>
+
+    <!-- SIGNATURES -->
+    <fieldset formGroupName="signatures">
+      <legend>SIGNATURES</legend>
+
+      <div class="form-group">
+        <label for="empSignature">Employee Signature (Type Full Name) *</label>
+        <input type="text" id="empSignature" formControlName="employee" />
+        <span class="error" *ngIf="isFieldInvalid('signatures', 'employee')">Signature is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="empSignatureDate">Date *</label>
+        <input type="date" id="empSignatureDate" formControlName="employeeDate" />
+        <span class="error" *ngIf="isFieldInvalid('signatures', 'employeeDate')">Date is required.</span>
+      </div>
+
+      <div class="form-group">
+        <label for="itRep">Authorized IT Representative</label>
+        <input type="text" id="itRep" formControlName="itRep" />
+      </div>
+
+      <div class="form-group">
+        <label for="itTitle">Job Title</label>
+        <input type="text" id="itTitle" formControlName="itTitle" />
+      </div>
+
+      <div class="form-group">
+        <label for="itSignature">Signature</label>
+        <input type="text" id="itSignature" formControlName="itSignature" />
+      </div>
+
+      <div class="form-group">
+        <label for="itSignatureDate">Date</label>
+        <input type="date" id="itSignatureDate" formControlName="itDate" />
+      </div>
+    </fieldset>
+
+    <!-- FOR OFFICIAL USE ONLY -->
+    <fieldset formGroupName="officialUse" class="official-use">
+      <legend>FOR OFFICIAL USE ONLY - IT DIAGNOSTIC REPORT</legend>
+
+      <div class="form-group">
+        <label for="receivedBy">Received By</label>
+        <input type="text" id="receivedBy" formControlName="receivedBy" />
+      </div>
+
+      <div class="form-group">
+        <label for="officialDateReceived">Date Received</label>
+        <input type="date" id="officialDateReceived" formControlName="dateReceived" />
+      </div>
+
+      <div formGroupName="assessment">
+        <h4>Initial Assessment</h4>
+        <div class="form-group">
+          <label class="inline"><input type="checkbox" formControlName="hardware" /> Hardware Issue</label>
+          <label class="inline"><input type="checkbox" formControlName="software" /> Software Issue</label>
+          <label class="inline"><input type="checkbox" formControlName="network" /> Network Issue</label>
+          <label class="inline"><input type="checkbox" formControlName="os" /> Operating System Issue</label>
+          <label class="inline"><input type="checkbox" formControlName="malware" /> Malware/Virus</label>
+          <label class="inline"><input type="checkbox" formControlName="userConfig" /> User Configuration</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="assessmentOther">Other Assessment</label>
+        <input type="text" id="assessmentOther" formControlName="assessmentOther" />
+      </div>
+
+      <div formGroupName="troubleshooting">
+        <h4>Troubleshooting Performed</h4>
+        <div class="form-group">
+          <label class="inline"><input type="checkbox" formControlName="hwDiag" /> Hardware Diagnostics</label>
+          <label class="inline"><input type="checkbox" formControlName="osRepair" /> Operating System Repair</label>
+          <label class="inline"><input type="checkbox" formControlName="driverUpdates" /> Driver Updates</label>
+          <label class="inline"><input type="checkbox" formControlName="swReinstall" /> Software Reinstallation</label>
+          <label class="inline"><input type="checkbox" formControlName="malwareRemoval" /> Malware Removal</label>
+          <label class="inline"><input type="checkbox" formControlName="winUpdates" /> Windows Updates</label>
+          <label class="inline"><input type="checkbox" formControlName="dataBackup" /> Data Backup</label>
+          <label class="inline"><input type="checkbox" formControlName="pwdReset" /> Password Reset</label>
+          <label class="inline"><input type="checkbox" formControlName="hwReplacement" /> Hardware Replacement</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="partsReplaced">Parts Replaced (if any)</label>
+        <textarea id="partsReplaced" formControlName="partsReplaced" rows="2"></textarea>
+      </div>
+
+      <h4>Outcome</h4>
+      <div class="form-group">
+        <label class="inline"><input type="radio" value="Resolved" formControlName="outcome" /> Issue Resolved</label>
+        <label class="inline"><input type="radio" value="Partially Resolved" formControlName="outcome" /> Partially Resolved</label>
+        <label class="inline"><input type="radio" value="Escalated" formControlName="outcome" /> Escalated</label>
+        <label class="inline"><input type="radio" value="Replacement Required" formControlName="outcome" /> Replacement Required</label>
+        <label class="inline"><input type="radio" value="Vendor Repair Required" formControlName="outcome" /> Vendor Repair Required</label>
+      </div>
+
+      <hr />
+
+      <h4>Device Returned to User</h4>
+
+      <div class="form-group">
+        <label for="dateReturned">Date Returned</label>
+        <input type="date" id="dateReturned" formControlName="dateReturned" />
+      </div>
+
+      <div class="form-group">
+        <label for="returnedBy">Returned By</label>
+        <input type="text" id="returnedBy" formControlName="returnedBy" />
+      </div>
+
+      <div class="form-group">
+        <label for="userConfirmation">Employee Confirmation of Receipt</label>
+        <input type="text" id="userConfirmation" formControlName="userConfirmation" />
+      </div>
+
+      <div class="form-group">
+        <label for="confirmationDate">Date</label>
+        <input type="date" id="confirmationDate" formControlName="confirmationDate" />
+      </div>
+
+      <div class="form-group">
+        <label for="additionalComments">Additional Comments</label>
+        <textarea id="additionalComments" formControlName="additionalComments" rows="3"></textarea>
+      </div>
+    </fieldset>
+
+    <button type="submit" class="submit-btn">Submit Device Troubleshooting Form</button>
+  </form>
+</div>

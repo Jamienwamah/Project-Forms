@@ -1,13 +1,22 @@
-<!doctype html>
-<html lang="en">
+<!DOCTYPE html>
+<html ng-app="deviceFormApp">
 <head>
-  <meta charset="utf-8">
-  <title>OptimumGForms</title>
-  <base href="/">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <meta charset="UTF-8">
+  <title>IT Device Management Forms</title>
+  <link rel="stylesheet" href="css/style.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
 </head>
 <body>
-  <app-root></app-root>
+
+  <!-- Load Module Definition First -->
+  <script src="app.js"></script>
+
+  <!-- Load Controllers -->
+  <script src="controllers/DeviceTroubleshootingController.js"></script>
+  <script src="controllers/DeviceReplacementController.js"></script>
+
+  <!-- Views / Forms -->
+  <div ng-include="'views/device-replacement-form.html'"></div>
+
 </body>
 </html>

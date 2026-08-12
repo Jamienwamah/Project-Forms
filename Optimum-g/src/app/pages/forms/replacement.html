@@ -1,0 +1,279 @@
+<div class="min-h-screen bg-slate-50 py-10 px-4 sm:px-6 lg:px-8 font-sans">
+  <div class="max-w-4xl mx-auto bg-white rounded-2xl border border-slate-200 p-6 sm:p-10 shadow-sm">
+    
+    <!-- Top Nav Back Link -->
+    <a routerLink="/" class="inline-flex items-center text-xs font-semibold text-indigo-600 hover:text-indigo-800 mb-6 transition">
+      <svg class="w-4 h-4 mr-1" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18"/>
+      </svg>
+      Back to Forms Directory
+    </a>
+
+    <!-- Title & Date -->
+    <div class="flex flex-col sm:flex-row sm:items-center sm:justify-between border-b border-slate-200 pb-5 mb-6 gap-4">
+      <div>
+        <h1 class="text-2xl font-extrabold text-slate-900 tracking-tight">DEVICE REPLACEMENT FORM</h1>
+        <p class="text-xs text-slate-500 mt-1">Optimum Global Capital Management Limited</p>
+      </div>
+      <div class="text-xs text-slate-600 bg-slate-100 px-3 py-2 rounded-lg border border-slate-200 self-start sm:self-auto">
+        <span class="font-bold">Date:</span> {{ replacementForm.get('formDate')?.value }}
+      </div>
+    </div>
+
+    <!-- Purpose Statement -->
+    <div class="bg-indigo-50/60 border border-indigo-100 rounded-xl p-4 text-xs sm:text-sm text-slate-700 leading-relaxed mb-8">
+      <span class="font-bold text-indigo-900 block mb-1">PURPOSE</span>
+      This Device Replacement Consent Form serves as an agreement between Optimum Global Capital Management Limited and the undersigned employee regarding the replacement and continued use of a company-issued device. By signing this form, the employee acknowledges receipt of the replacement device and agrees to comply with the company's IT policies and asset management procedures.
+    </div>
+
+    <!-- Submission Banner -->
+    @if (isSubmitted) {
+      <div class="p-4 bg-emerald-50 border border-emerald-200 rounded-xl text-emerald-800 text-sm mb-8">
+        ✅ <strong>Submission Successful!</strong> Device replacement agreement has been logged and sent to IT.
+      </div>
+    }
+
+    <!-- Form Start -->
+    @if (!isSubmitted) {
+      <form [formGroup]="replacementForm" (ngSubmit)="onSubmit()" class="space-y-8">
+
+        <!-- 1. EMPLOYEE INFORMATION -->
+        <fieldset formGroupName="employee" class="border border-slate-200 rounded-xl p-5 bg-white">
+          <legend class="text-xs font-bold text-indigo-600 uppercase tracking-wider px-2 bg-white">1. Employee Information</legend>
+          
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Name *</label>
+              <input type="text" formControlName="fullName" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              @if (replacementForm.get('employee.fullName')?.touched && replacementForm.get('employee.fullName')?.invalid) {
+                <span class="text-xs text-red-500 mt-1 block">Full name is required.</span>
+              }
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Department *</label>
+              <input type="text" formControlName="department" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Job Title *</label>
+              <input type="text" formControlName="jobTitle" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Employee ID *</label>
+              <input type="text" formControlName="employeeId" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 2. DEVICE REPLACEMENT DETAILS -->
+        <div class="space-y-6">
+          
+          <!-- Previously Assigned Device -->
+          <fieldset formGroupName="previousDevice" class="border border-slate-200 rounded-xl p-5 bg-white">
+            <legend class="text-xs font-bold text-amber-700 uppercase tracking-wider px-2 bg-white">2A. Previously Assigned Device</legend>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Asset Tag (if applicable)</label>
+                <input type="text" formControlName="assetTag" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Device Type *</label>
+                <select formControlName="deviceType" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                  <option value="">-- Select Type --</option>
+                  <option value="Laptop">Laptop</option>
+                  <option value="Desktop">Desktop</option>
+                  <option value="Phone">Phone</option>
+                  <option value="Tablet">Tablet</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Brand / Model *</label>
+                <input type="text" formControlName="brandModel" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Serial Number *</label>
+                <input type="text" formControlName="serialNumber" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+
+              <div class="md:col-span-2">
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Reason for Replacement *</label>
+                <textarea formControlName="reasonForReplacement" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"></textarea>
+              </div>
+            </div>
+          </fieldset>
+
+          <!-- Replacement Device -->
+          <fieldset formGroupName="replacementDevice" class="border border-slate-200 rounded-xl p-5 bg-white">
+            <legend class="text-xs font-bold text-emerald-700 uppercase tracking-wider px-2 bg-white">2B. Replacement Device</legend>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-2">
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Asset Tag (if applicable)</label>
+                <input type="text" formControlName="assetTag" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Device Type *</label>
+                <select formControlName="deviceType" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none bg-white">
+                  <option value="">-- Select Type --</option>
+                  <option value="Laptop">Laptop</option>
+                  <option value="Desktop">Desktop</option>
+                  <option value="Phone">Phone</option>
+                  <option value="Tablet">Tablet</option>
+                </select>
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Brand / Model *</label>
+                <input type="text" formControlName="brandModel" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Serial Number *</label>
+                <input type="text" formControlName="serialNumber" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Accessories Issued (Charger, Bag, Mouse, etc.)</label>
+                <input type="text" formControlName="accessoriesIssued" placeholder="e.g., Charger, Laptop Bag, Wireless Mouse" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+
+              <div>
+                <label class="block text-xs font-semibold text-slate-700 mb-1">Date Issued *</label>
+                <input type="date" formControlName="dateIssued" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+              </div>
+            </div>
+          </fieldset>
+        </div>
+
+        <!-- 3. TERMS AND CONDITIONS -->
+        <div class="border border-slate-200 rounded-xl p-5 bg-slate-50/50">
+          <h3 class="text-xs font-bold text-slate-900 uppercase tracking-wider mb-3">Terms and Conditions</h3>
+          <ol class="list-decimal list-inside space-y-2 text-xs sm:text-sm text-slate-600 leading-relaxed">
+            <li><strong>Ownership:</strong> The laptop is the property of Optimum Global Financial Services Limited and is provided solely for work-related purposes.</li>
+            <li><strong>Usage:</strong> I will use the laptop responsibly and follow company policies, data security, and confidentiality guidelines.</li>
+            <li><strong>Care and Maintenance:</strong> I am responsible for the proper care and maintenance of the laptop. Any loss or damage due to negligence will be my responsibility, and I may be required to cover repair or replacement costs.</li>
+            <li><strong>Return:</strong> Upon termination of my employment or at the company’s request, I will return the laptop and all associated accessories in good working condition.</li>
+            <li><strong>Inspection:</strong> The company reserves the right to inspect the laptop at any time to ensure compliance with company policies.</li>
+            <li><strong>Reporting Issues:</strong> I will promptly report any technical issues, theft, loss, or damage to the IT department.</li>
+          </ol>
+        </div>
+
+        <!-- 4. ACKNOWLEDGMENT & SIGNATURES -->
+        <fieldset formGroupName="consent" class="border border-slate-200 rounded-xl p-5 bg-white space-y-4">
+          <legend class="text-xs font-bold text-indigo-600 uppercase tracking-wider px-2 bg-white">4. Acknowledgment & Signatures</legend>
+
+          <label class="flex items-start space-x-3 cursor-pointer">
+            <input type="checkbox" formControlName="agreed" class="mt-1 h-4 w-4 text-indigo-600 border-slate-300 rounded focus:ring-indigo-500" />
+            <span class="text-xs sm:text-sm text-slate-700">
+              By checking this box, I confirm that I have read, understood, and agreed to the terms outlined above. I accept responsibility for the company-provided laptop under these conditions. *
+            </span>
+          </label>
+          @if (replacementForm.get('consent.agreed')?.touched && replacementForm.get('consent.agreed')?.invalid) {
+            <span class="text-xs text-red-500 block">You must agree to the terms to proceed.</span>
+          }
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 pt-2">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Employee Signature (Type Full Name) *</label>
+              <input type="text" formControlName="employeeSignature" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Date *</label>
+              <input type="date" formControlName="employeeSignatureDate" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Authorized Representative Name</label>
+              <input type="text" formControlName="authorizedRepName" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Title</label>
+              <input type="text" formControlName="authorizedRepTitle" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 5. FOR OFFICIAL USE ONLY -->
+        <fieldset formGroupName="officialUse" class="border border-dashed border-slate-300 rounded-xl p-5 bg-slate-50">
+          <legend class="text-xs font-bold text-slate-600 uppercase tracking-wider px-2 bg-slate-50">5. For Official Use Only (IT Department)</legend>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Issued By</label>
+              <input type="text" formControlName="issuedBy" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Date Issued</label>
+              <input type="date" formControlName="issuedByDate" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Old Device Returned?</label>
+              <div class="flex items-center space-x-4 mt-2">
+                <label class="inline-flex items-center text-xs font-medium text-slate-700">
+                  <input type="radio" [value]="true" formControlName="oldDeviceReturned" class="text-indigo-600 mr-1.5" /> Yes
+                </label>
+                <label class="inline-flex items-center text-xs font-medium text-slate-700">
+                  <input type="radio" [value]="false" formControlName="oldDeviceReturned" class="text-indigo-600 mr-1.5" /> No
+                </label>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Condition of Returned Device</label>
+              <select formControlName="returnedCondition" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white">
+                <option value="Excellent">Excellent</option>
+                <option value="Good">Good</option>
+                <option value="Fair">Fair</option>
+                <option value="Damaged">Damaged</option>
+              </select>
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Old Device Received By</label>
+              <input type="text" formControlName="oldDeviceReceivedBy" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Date Received</label>
+              <input type="date" formControlName="dateReceived" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Replacement Device Configured By</label>
+              <input type="text" formControlName="configuredBy" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white" />
+            </div>
+
+            <div>
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Asset Register Updated By</label>
+              <input type="text" formControlName="assetRegisterUpdatedBy" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white" />
+            </div>
+
+            <div class="md:col-span-2">
+              <label class="block text-xs font-semibold text-slate-700 mb-1">Additional Comments</label>
+              <textarea formControlName="additionalComments" rows="2" class="w-full px-3 py-2 border border-slate-300 rounded-lg text-sm bg-white"></textarea>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- Submit Button -->
+        <button 
+          type="submit" 
+          class="w-full py-3 bg-indigo-600 text-white font-bold rounded-xl hover:bg-indigo-700 transition duration-150 shadow-sm cursor-pointer text-sm">
+          Submit Device Replacement Agreement
+        </button>
+
+      </form>
+    }
+  </div>
+</div>
