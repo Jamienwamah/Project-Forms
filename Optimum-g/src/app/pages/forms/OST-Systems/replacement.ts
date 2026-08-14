@@ -48,7 +48,7 @@ export interface DeviceReplacementPayload {
 }
 
 @Component({
-  selector: 'app-ofs-device-replacement',
+  selector: 'app-ost-device-replacement',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   template: `
@@ -63,7 +63,7 @@ export interface DeviceReplacementPayload {
             </svg>
             Back to Portal Landing
           </a>
-          <span class="text-xs text-slate-400 font-mono">Form Ref: OFS-DEV-RPL</span>
+          <span class="text-xs text-slate-400 font-mono">Form Ref: OST-DEV-RPL</span>
         </div>
 
         <!-- Success Alert Banner -->
@@ -84,10 +84,10 @@ export interface DeviceReplacementPayload {
           <div class="bg-slate-900 text-white p-6 sm:p-8">
             <div class="flex justify-between items-start">
               <div>
-                <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Optimum Financial Services Limited</span>
+                <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">OST-Systems</span>
                 <h1 class="text-2xl font-bold">Device Replacement Consent Form</h1>
                 <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
-                  Agreement regarding the replacement and continued use of company-issued devices in compliance with corporate IT policies.
+                  Agreement between OST-Systems and the employee regarding the replacement and continued use of company-issued devices.
                 </p>
               </div>
             </div>
@@ -122,14 +122,14 @@ export interface DeviceReplacementPayload {
 
                 <div>
                   <label class="block text-xs font-medium text-slate-700 uppercase mb-1">Department *</label>
-                  <input type="text" formControlName="department" placeholder="Finance & Accounts" 
+                  <input type="text" formControlName="department" placeholder="Systems Infrastructure" 
                     class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                     [class.border-red-500]="isFieldInvalid('employee', 'department')" />
                 </div>
 
                 <div>
                   <label class="block text-xs font-medium text-slate-700 uppercase mb-1">Job Title *</label>
-                  <input type="text" formControlName="jobTitle" placeholder="Financial Accountant" 
+                  <input type="text" formControlName="jobTitle" placeholder="Systems Engineer" 
                     class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                     [class.border-red-500]="isFieldInvalid('employee', 'jobTitle')" />
                 </div>
@@ -147,7 +147,7 @@ export interface DeviceReplacementPayload {
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
                     <label class="block text-xs font-medium text-slate-700 uppercase mb-1">Asset Tag</label>
-                    <input type="text" formControlName="assetTag" placeholder="OFS-AST-0192" class="w-full px-3 py-2 bg-white border rounded-lg text-sm" />
+                    <input type="text" formControlName="assetTag" placeholder="OST-AST-0192" class="w-full px-3 py-2 bg-white border rounded-lg text-sm" />
                   </div>
 
                   <div>
@@ -187,7 +187,7 @@ export interface DeviceReplacementPayload {
                 <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
                   <div>
                     <label class="block text-xs font-medium text-slate-700 uppercase mb-1">Asset Tag</label>
-                    <input type="text" formControlName="assetTag" placeholder="OFS-AST-0481" class="w-full px-3 py-2 bg-white border rounded-lg text-sm" />
+                    <input type="text" formControlName="assetTag" placeholder="OST-AST-0481" class="w-full px-3 py-2 bg-white border rounded-lg text-sm" />
                   </div>
 
                   <div>
@@ -232,7 +232,7 @@ export interface DeviceReplacementPayload {
             <div class="space-y-3 p-5 bg-slate-50 border border-slate-200 rounded-xl">
               <h3 class="text-sm font-bold text-slate-800 uppercase tracking-wide">Terms and Conditions</h3>
               <ol class="list-decimal list-inside space-y-2 text-xs text-slate-600 leading-relaxed">
-                <li><strong class="text-slate-800">Ownership:</strong> The laptop is the property of Optimum Financial Services Limited and is provided solely for work-related purposes.</li>
+                <li><strong class="text-slate-800">Ownership:</strong> The device is the property of OST-Systems and is provided solely for work-related purposes.</li>
                 <li><strong class="text-slate-800">Usage:</strong> I will use the laptop responsibly and follow company policies, data security, and confidentiality guidelines.</li>
                 <li><strong class="text-slate-800">Care and Maintenance:</strong> I am responsible for the proper care and maintenance of the laptop. Any loss or damage due to negligence will be my responsibility, and I may be required to cover repair or replacement costs.</li>
                 <li><strong class="text-slate-800">Return:</strong> Upon termination of my employment or at the company’s request, I will return the laptop and all associated accessories in good working condition.</li>
@@ -359,7 +359,7 @@ export interface DeviceReplacementPayload {
     </div>
   `
 })
-export class OfsDeviceReplacementFormComponent implements OnInit {
+export class OstReplacement implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
@@ -422,7 +422,7 @@ export class OfsDeviceReplacementFormComponent implements OnInit {
   onSubmit(): void {
     if (this.replacementForm.valid) {
       const payload: DeviceReplacementPayload = this.replacementForm.value;
-      console.log('OFS Device Replacement Payload:', payload);
+      console.log('OST Device Replacement Payload:', payload);
       this.isSubmitted = true;
     } else {
       this.replacementForm.markAllAsTouched();

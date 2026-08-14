@@ -272,7 +272,7 @@ export interface InfrastructureReceiptPayload {
     </div>
   `
 })
-export class OfsInfrastructureReceiptFormComponent implements OnInit {
+export class OGFSInfrastructure implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
@@ -334,15 +334,26 @@ export class OfsInfrastructureReceiptFormComponent implements OnInit {
     });
   }
 
+  // onSubmit(): void {
+  //   if (this.receiptForm.valid) {
+  //     const payload: InfrastructureReceiptPayload = this.receiptForm.value;
+  //     console.log('Infrastructure Receipt Payload:', payload);
+  //     this.isSubmitted = true;
+  //   } else {
+  //     this.receiptForm.markAllAsTouched();
+  //   }
+  // }
   onSubmit(): void {
-    if (this.receiptForm.valid) {
-      const payload: InfrastructureReceiptPayload = this.receiptForm.value;
-      console.log('Infrastructure Receipt Payload:', payload);
-      this.isSubmitted = true;
-    } else {
-      this.receiptForm.markAllAsTouched();
-    }
+  if (this.receiptForm.valid) {
+    const payload = this.receiptForm.value;
+
+    console.log('Infrastructure Receipt Payload:', payload);
+
+    this.isSubmitted = true;
+  } else {
+    this.receiptForm.markAllAsTouched();
   }
+}
 
   public isFieldInvalid(groupNameOrControl: string, fieldName?: string): boolean {
     if (fieldName) {

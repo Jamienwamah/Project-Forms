@@ -1,22 +1,25 @@
-<!DOCTYPE html>
-<html ng-app="deviceFormApp">
+<!doctype html>
+<html lang="en">
+
 <head>
-  <meta charset="UTF-8">
-  <title>IT Device Management Forms</title>
-  <link rel="stylesheet" href="css/style.css">
-  <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.8.2/angular.min.js"></script>
+
+  <meta charset="utf-8">
+
+  <title>IT Service & Device Portal</title>
+
+  <base href="/">
+
+  <meta
+    name="viewport"
+    content="width=device-width, initial-scale=1"
+  >
+
 </head>
+
 <body>
 
-  <!-- Load Module Definition First -->
-  <script src="app.js"></script>
-
-  <!-- Load Controllers -->
-  <script src="controllers/DeviceTroubleshootingController.js"></script>
-  <script src="controllers/DeviceReplacementController.js"></script>
-
-  <!-- Views / Forms -->
-  <div ng-include="'views/device-replacement-form.html'"></div>
+  <app-root></app-root>
 
 </body>
+
 </html>

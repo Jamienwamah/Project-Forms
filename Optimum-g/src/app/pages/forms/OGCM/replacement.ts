@@ -294,7 +294,7 @@ import { Router, RouterLink } from '@angular/router';
     </div>
   `
 })
-export class DeviceReplacementFormComponent implements OnInit {
+export class OGCMReplacement implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 

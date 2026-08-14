@@ -219,7 +219,7 @@ export interface OgfsDeviceTroubleshootingPayload {
     </div>
   `
 })
-export class OgfsDeviceTroubleshootingComponent implements OnInit {
+export class OGFSTroubleshooting implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 

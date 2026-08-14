@@ -212,7 +212,7 @@ export interface OstDeviceTroubleshootingPayload {
     </div>
   `
 })
-export class OstDeviceTroubleshootingComponent implements OnInit {
+export class OstTroubleshoot implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 

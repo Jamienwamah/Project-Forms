@@ -3,7 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ReactiveFormsModule, FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 
-export interface InfrastructureReceiptPayload {
+export interface OSTInfrastructure {
   documentNo: string;
   dateReceived: string;
   procurement: {
@@ -33,7 +33,7 @@ export interface InfrastructureReceiptPayload {
 }
 
 @Component({
-  selector: 'app-ogcm-infrastructure-receipt',
+  selector: 'app-it-infrastructure-receipt',
   standalone: true,
   imports: [CommonModule, ReactiveFormsModule, RouterLink],
   template: `
@@ -48,7 +48,7 @@ export interface InfrastructureReceiptPayload {
             </svg>
             Back to Portal Landing
           </a>
-          <span class="text-xs text-slate-400 font-mono">Form Ref: OGCM-INFRA-REG</span>
+          <span class="text-xs text-slate-400 font-mono">Form Ref: OST-INFRA-REG</span>
         </div>
 
         <!-- Success Alert Banner -->
@@ -69,7 +69,7 @@ export interface InfrastructureReceiptPayload {
           <div class="bg-slate-900 text-white p-6 sm:p-8">
             <div class="flex justify-between items-start">
               <div>
-                <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">Optimum Global Capital Management</span>
+                <span class="text-xs font-bold text-indigo-400 uppercase tracking-widest block mb-1">OST-Systems Technology</span>
                 <h1 class="text-2xl font-bold">IT Infrastructure Receipt & Registration</h1>
                 <p class="text-slate-300 text-xs sm:text-sm mt-1 max-w-2xl leading-relaxed">
                   Record and register new IT infrastructure, networking equipment, servers, and hardware prior to IT Asset Register entry and deployment.
@@ -84,7 +84,7 @@ export interface InfrastructureReceiptPayload {
             <div class="p-4 bg-slate-50 border border-slate-200 rounded-lg grid grid-cols-1 sm:grid-cols-2 gap-4">
               <div>
                 <label class="block text-xs font-medium text-slate-700 uppercase mb-1">Document No. *</label>
-                <input type="text" formControlName="documentNo" placeholder="OGCM-REG-2026-001" 
+                <input type="text" formControlName="documentNo" placeholder="OST-REG-2026-001" 
                   class="w-full px-3 py-2 bg-white border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none"
                   [class.border-red-500]="isFieldInvalid('documentNo')" />
                 <span *ngIf="isFieldInvalid('documentNo')" class="text-xs text-red-500 mt-1 block">Document number is required.</span>
@@ -106,7 +106,7 @@ export interface InfrastructureReceiptPayload {
               <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
                 <div>
                   <label class="block text-xs font-medium text-slate-700 uppercase mb-1">Asset Tag (if applicable)</label>
-                  <input type="text" formControlName="assetTag" placeholder="OGCM-AST-8849" 
+                  <input type="text" formControlName="assetTag" placeholder="OST-AST-8849" 
                     class="w-full px-3 py-2 border rounded-lg text-sm focus:ring-2 focus:ring-indigo-500 focus:outline-none" />
                 </div>
 
@@ -272,7 +272,7 @@ export interface InfrastructureReceiptPayload {
     </div>
   `
 })
-export class OgcmInfrastructureReceiptFormComponent implements OnInit {
+export class ItInfrastructureReceiptFormComponent implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
@@ -334,15 +334,26 @@ export class OgcmInfrastructureReceiptFormComponent implements OnInit {
     });
   }
 
+  // onSubmit(): void {
+  //   if (this.receiptForm.valid) {
+  //     const payload: InfrastructureReceiptPayload = this.receiptForm.value;
+  //     console.log('Infrastructure Receipt Payload:', payload);
+  //     this.isSubmitted = true;
+  //   } else {
+  //     this.receiptForm.markAllAsTouched();
+  //   }
+  // }
   onSubmit(): void {
-    if (this.receiptForm.valid) {
-      const payload: InfrastructureReceiptPayload = this.receiptForm.value;
-      console.log('Infrastructure Receipt Payload:', payload);
-      this.isSubmitted = true;
-    } else {
-      this.receiptForm.markAllAsTouched();
-    }
+  if (this.receiptForm.valid) {
+    const payload = this.receiptForm.value;
+
+    console.log('Infrastructure Receipt Payload:', payload);
+
+    this.isSubmitted = true;
+  } else {
+    this.receiptForm.markAllAsTouched();
   }
+}
 
   public isFieldInvalid(groupNameOrControl: string, fieldName?: string): boolean {
     if (fieldName) {

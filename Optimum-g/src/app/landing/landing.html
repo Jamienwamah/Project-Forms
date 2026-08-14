@@ -1,0 +1,419 @@
+<div class="min-h-screen bg-slate-50/60 py-12 px-4 sm:px-6 lg:px-8 font-sans">
+  <div class="max-w-6xl mx-auto">
+
+    <!-- ========================================================= -->
+    <!-- HEADER -->
+    <!-- ========================================================= -->
+
+    <header
+      class="flex items-center justify-between mb-16 pb-6 border-b border-slate-200"
+    >
+      <div class="flex items-center gap-5">
+
+        <!-- Logo -->
+        <div class="flex items-center justify-center">
+          <img
+            src="/assets/optimum-global-logo.png"
+            alt="Optimum Global"
+            class="h-14 w-auto object-contain"
+          />
+        </div>
+
+        <!-- Portal Title -->
+        <div class="border-l border-slate-200 pl-5">
+          <h1
+            class="text-3xl font-bold tracking-tight text-blue-950 sm:text-4xl"
+          >
+            IT Service &amp; Device Portal
+          </h1>
+
+          <p class="text-sm text-slate-500 mt-1">
+            IT Support &amp; Service Requests
+          </p>
+        </div>
+
+      </div>
+
+      <!-- Version -->
+      <div class="hidden sm:flex items-center gap-2 text-sm text-slate-500">
+        <span>v1.2</span>
+
+        <span class="w-1 h-1 rounded-full bg-slate-300"></span>
+
+        <span>Public Access</span>
+      </div>
+    </header>
+
+
+    <!-- ========================================================= -->
+    <!-- INFORMATION BANNER -->
+    <!-- ========================================================= -->
+
+    <div
+      class="mb-12 p-4 bg-blue-50 border border-blue-200 rounded-2xl
+             flex items-center gap-3 text-blue-900 shadow-inner"
+    >
+
+      <svg
+        class="w-5 h-5 text-blue-600 flex-shrink-0"
+        fill="none"
+        stroke="currentColor"
+        viewBox="0 0 24 24"
+      >
+        <path
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          stroke-width="2"
+          d="M13 16h-1v-4h-1m1-4h.01
+             M21 12a9 9 0 11-18 0
+             9 9 0 0118 0z"
+        ></path>
+      </svg>
+
+      <p class="text-sm font-medium">
+        Welcome! Please select a request form, then choose your organization
+        entity to continue. No login required.
+      </p>
+
+    </div>
+
+
+    <!-- ========================================================= -->
+    <!-- FORM CARDS -->
+    <!-- ========================================================= -->
+
+    <main
+      class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6"
+    >
+
+      <article
+        *ngFor="let form of availableForms"
+
+        class="group bg-white rounded-3xl
+               border border-slate-200
+               hover:shadow-2xl
+               hover:border-blue-300/60
+               hover:-translate-y-1
+               transition-all duration-300
+               p-8
+               flex flex-col justify-between
+               relative shadow-lg"
+      >
+
+        <!-- ===================================================== -->
+        <!-- CARD CONTENT -->
+        <!-- ===================================================== -->
+
+        <div>
+
+          <!-- Icon + Category -->
+          <div
+            class="flex items-center justify-between mb-8"
+          >
+
+            <!-- Icon -->
+            <div
+              class="w-16 h-16 rounded-3xl
+                     flex items-center justify-center
+                     text-blue-600 shadow-inner"
+              [ngClass]="form.iconBg"
+            >
+
+              <svg
+                class="w-9 h-9"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+                  [attr.d]="form.iconPath"
+                ></path>
+
+              </svg>
+
+            </div>
+
+
+            <!-- Category -->
+            <span
+              class="text-xs font-semibold
+                     px-3 py-1
+                     rounded-full
+                     bg-slate-100
+                     text-slate-600
+                     border border-slate-200/60"
+            >
+              {{ form.category }}
+            </span>
+
+          </div>
+
+
+          <!-- Title -->
+          <h2
+            class="text-xl font-extrabold
+                   text-blue-950
+                   group-hover:text-blue-700
+                   transition-colors"
+          >
+            {{ form.title }}
+          </h2>
+
+
+          <!-- Description -->
+          <p
+            class="mt-3 text-sm
+                   text-slate-600
+                   leading-relaxed
+                   min-h-[60px]"
+          >
+            {{ form.description }}
+          </p>
+
+        </div>
+
+
+        <!-- ===================================================== -->
+        <!-- ACTION AREA -->
+        <!-- ===================================================== -->
+
+        <div
+          class="mt-10 pt-5
+                 border-t border-slate-100
+                 flex items-center justify-between
+                 relative"
+        >
+
+          <!-- Step -->
+          <span
+            class="text-xs font-medium text-slate-400"
+          >
+            Step 1 of 2: Select Entity
+          </span>
+
+
+          <!-- =================================================== -->
+          <!-- DROPDOWN -->
+          <!-- =================================================== -->
+
+          <div class="relative inline-block text-left">
+
+            <!-- Select Entity Button -->
+            <button
+              type="button"
+
+              (click)="toggleDropdown(form.id, $event)"
+
+              class="inline-flex
+                     items-center
+                     justify-center
+                     px-5 py-2.5
+
+                     bg-blue-600
+                     hover:bg-blue-700
+                     active:bg-blue-800
+
+                     text-white
+                     text-sm
+                     font-semibold
+
+                     rounded-xl
+                     shadow-md
+
+                     transition-all
+
+                     focus:outline-none
+                     focus:ring-2
+                     focus:ring-blue-500
+                     focus:ring-offset-2
+
+                     gap-2"
+            >
+
+              Select Entity
+
+              <!-- Arrow -->
+              <svg
+                class="w-4 h-4
+                       transition-transform duration-200"
+
+                [class.rotate-180]="
+                  activeDropdownId === form.id
+                "
+
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+
+                <path
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  stroke-width="2"
+
+                  d="M19 9l-7 7-7-7"
+                ></path>
+
+              </svg>
+
+            </button>
+
+
+            <!-- ================================================= -->
+            <!-- ENTITY DROPDOWN -->
+            <!-- ================================================= -->
+
+            <div
+              *ngIf="activeDropdownId === form.id"
+
+              class="absolute
+                     right-0
+                     bottom-full
+                     mb-3
+                     w-72
+
+                     rounded-2xl
+                     bg-white
+
+                     shadow-xl
+                     ring-1
+                     ring-slate-900/10
+
+                     z-50
+
+                     overflow-hidden"
+            >
+
+              <div class="p-3 space-y-1">
+
+                <!-- Dropdown Header -->
+                <div
+                  class="px-3
+                         py-2
+                         border-b
+                         border-slate-100
+                         mb-2"
+                >
+
+                  <p
+                    class="text-[11px]
+                           font-semibold
+                           uppercase
+                           tracking-wider
+                           text-slate-400"
+                  >
+                    Target Organization
+                  </p>
+
+                </div>
+
+
+                <!-- ================================================= -->
+                <!-- COMPANY OPTIONS -->
+                <!-- ================================================= -->
+
+                <button
+                  *ngFor="let company of companyOptions"
+
+                  type="button"
+
+                  (click)="
+                    selectCompanyAndNavigate(
+                      form,
+                      company.code
+                    )
+                  "
+
+                  class="w-full
+                         text-left
+
+                         px-3
+                         py-3
+
+                         text-sm
+                         text-blue-950
+
+                         hover:bg-blue-50
+                         hover:text-blue-700
+
+                         rounded-xl
+
+                         font-semibold
+
+                         transition-colors
+
+                         flex
+                         items-center
+                         justify-between
+
+                         group/item"
+                >
+
+                  <!-- Company Name -->
+                  <span>
+                    {{ company.label }}
+                  </span>
+
+
+                  <!-- Arrow -->
+                  <svg
+                    class="w-4 h-4
+                           text-slate-400
+                           group-hover/item:text-blue-600
+                           transition-colors"
+
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                  >
+
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+
+                      d="M9 5l7 7-7 7"
+                    ></path>
+
+                  </svg>
+
+                </button>
+
+              </div>
+
+            </div>
+
+          </div>
+
+        </div>
+
+      </article>
+
+    </main>
+
+
+    <!-- ========================================================= -->
+    <!-- FOOTER -->
+    <!-- ========================================================= -->
+
+    <footer
+      class="mt-20
+             py-8
+             border-t
+             border-slate-200
+
+             text-center
+             text-sm
+             text-slate-500"
+    >
+
+      &copy; 2026 Optimum Global. All rights reserved.
+
+    </footer>
+
+  </div>
+</div>

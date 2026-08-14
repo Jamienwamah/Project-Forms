@@ -321,7 +321,7 @@ export interface DeviceTroubleshootingPayload {
     </div>
   `
 })
-export class DeviceTroubleshootingComponent implements OnInit {
+export class OGCMTroubleshoot implements OnInit {
   private fb = inject(FormBuilder);
   private router = inject(Router);
 
