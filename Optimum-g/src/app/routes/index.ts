@@ -1,10 +1,10 @@
 import { Routes } from '@angular/router';
-import { LandingPageComponent } from '../landing/landing';
+import { LandingComponent } from '../landing/landing';
 
 export const appRoutes: Routes = [
   { 
     path: '', 
-    component: LandingPageComponent 
+    component: LandingComponent
   },
   { 
     path: 'forms',
