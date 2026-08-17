@@ -147,78 +147,24 @@ export class LandingComponent {
   // ============================================================
 
   selectCompanyAndNavigate(
-  form: FormCard,
-  companyCode: string
-): void {
-  this.activeDropdownId = null;
+    form: FormCard,
+    companyCode: string
+  ): void {
+    this.activeDropdownId = null;
 
-  let route = '';
+    // Dynamically construct the route matching app.routes.ts
+    
+    const validCodes = ['OST', 'OGCM', 'OGFS'];
 
-  switch (companyCode) {
+    if (validCodes.includes(companyCode.toUpperCase())) {
+      const code = companyCode.toUpperCase();
+      const route = `/forms/${code}/${form.id}`;
 
-    case 'ost-systems':
+      console.log('Navigating to:', route);
+      this.router.navigateByUrl(route);
+      return;
+    }
 
-      if (form.id === 'replacement') {
-        route = '/pages/forms/OST-Systems/replacement';
-      }
-
-      else if (form.id === 'troubleshooting') {
-        route = '/pages/forms/OST-Systems/troubleshooting';
-      }
-
-      else if (form.id === 'infrastructure') {
-        route = '/pages/forms/OST-Systems/infrastructure';
-      }
-
-      break;
-
-
-    case 'optimum-capital':
-
-      if (form.id === 'replacement') {
-        route = '/pages/forms/OGCM/replacement';
-      }
-
-      else if (form.id === 'troubleshooting') {
-        route = '/pages/forms/OGCM/troubleshooting';
-      }
-
-      else if (form.id === 'infrastructure') {
-        route = '/pages/forms/OGCM/infrastructure';
-      }
-
-      break;
-
-
-    case 'optimum-financial':
-
-      if (form.id === 'replacement') {
-        route = '/pages/forms/OGFS/replacement';
-      }
-
-      else if (form.id === 'troubleshooting') {
-        route = '/pages/forms/OGFS/troubleshooting';
-      }
-
-      else if (form.id === 'infrastructure') {
-        route = '/pages/forms/OGFS/infrastructure';
-      }
-
-      break;
+    console.error('No route found for:', form.id, companyCode);
   }
-
-  if (!route) {
-    console.error(
-      'No route found for:',
-      form.id,
-      companyCode
-    );
-
-    return;
-  }
-
-  console.log('Navigating to:', route);
-
-  this.router.navigateByUrl(route);
 }
-};

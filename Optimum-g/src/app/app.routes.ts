@@ -1,4 +1,5 @@
 import { Routes } from '@angular/router';
+import { FORM_ROUTES } from './routes/forms.route';
 
 export const routes: Routes = [
 
@@ -119,6 +120,7 @@ export const routes: Routes = [
   {
     path: '**',
     redirectTo: '',
+    pathMatch: 'full'
   },
 
 ];
