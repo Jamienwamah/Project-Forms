@@ -152,16 +152,12 @@ export class LandingComponent {
   ): void {
     this.activeDropdownId = null;
 
-    // Dynamically construct the route matching app.routes.ts
-    
     const validCodes = ['OST', 'OGCM', 'OGFS'];
 
     if (validCodes.includes(companyCode.toUpperCase())) {
       const code = companyCode.toUpperCase();
-      const route = `/forms/${code}/${form.id}`;
 
-      console.log('Navigating to:', route);
-      this.router.navigateByUrl(route);
+      this.router.navigate(['/forms', code, form.id]);
       return;
     }
 

@@ -35,14 +35,9 @@ describe('LandingComponent Navigation Test', () => {
       iconPath: '',
     };
 
-    // Execute the navigation logic
-    component.selectCompanyAndNavigate(mockForm, 'optimum-financial');
+    component.selectCompanyAndNavigate(mockForm, 'OGFS');
 
-    // Wait for async lazy-loaded component resolution
     await fixture.whenStable();
-
-    // Verify the active URL in the location bar
-    console.log('Current URL in Test:', location.path());
 
     expect(location.path()).toBe('/forms/OGFS/troubleshooting');
   });

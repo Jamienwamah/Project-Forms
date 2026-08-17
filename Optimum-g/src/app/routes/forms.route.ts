@@ -11,19 +11,30 @@ import { ItInfrastructureReceiptFormComponent } from '../pages/forms/OST-Systems
 
 export const FORM_ROUTES: Routes = [
   // OGCM
-  { path: 'ogcm/replacement', component: OGCMReplacement },
-  { path: 'ogcm/troubleshooting', component: OGCMTroubleshoot },
-  { path: 'ogcm/infrastructure', component: OgcmInfrastructureReceiptFormComponent },
+  { path: 'OGCM/replacement', component: OGCMReplacement },
+  { path: 'OGCM/troubleshooting', component: OGCMTroubleshoot },
+  { path: 'OGCM/infrastructure', component: OgcmInfrastructureReceiptFormComponent },
 
   // OGFS
-  { path: 'ogfs/replacement', component: OGFSReplacement },
-  { path: 'ogfs/troubleshooting', component: OGFSTroubleshooting },
-  { path: 'ogfs/infrastructure', component: OGFSInfrastructure },
+  { path: 'OGFS/replacement', component: OGFSReplacement },
+  { path: 'OGFS/troubleshooting', component: OGFSTroubleshooting },
+  { path: 'OGFS/infrastructure', component: OGFSInfrastructure },
 
   // OST
-  { path: 'ost/replacement', component: OstReplacement },
-  { path: 'ost/troubleshooting', component: OstTroubleshoot },
-  { path: 'ost/infrastructure', component: ItInfrastructureReceiptFormComponent },
+  { path: 'OST/replacement', component: OstReplacement },
+  { path: 'OST/troubleshooting', component: OstTroubleshoot },
+  { path: 'OST/infrastructure', component: ItInfrastructureReceiptFormComponent },
+
+  // Lowercase aliases for manually typed URLs.
+  { path: 'ogcm/replacement', redirectTo: 'OGCM/replacement', pathMatch: 'full' },
+  { path: 'ogcm/troubleshooting', redirectTo: 'OGCM/troubleshooting', pathMatch: 'full' },
+  { path: 'ogcm/infrastructure', redirectTo: 'OGCM/infrastructure', pathMatch: 'full' },
+  { path: 'ogfs/replacement', redirectTo: 'OGFS/replacement', pathMatch: 'full' },
+  { path: 'ogfs/troubleshooting', redirectTo: 'OGFS/troubleshooting', pathMatch: 'full' },
+  { path: 'ogfs/infrastructure', redirectTo: 'OGFS/infrastructure', pathMatch: 'full' },
+  { path: 'ost/replacement', redirectTo: 'OST/replacement', pathMatch: 'full' },
+  { path: 'ost/troubleshooting', redirectTo: 'OST/troubleshooting', pathMatch: 'full' },
+  { path: 'ost/infrastructure', redirectTo: 'OST/infrastructure', pathMatch: 'full' },
 ];
 
 // import { Routes } from '@angular/router';
